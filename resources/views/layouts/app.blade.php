@@ -76,7 +76,7 @@
 						<label>Forms &amp; table</label>
 					</li>
 					<li class="nav-item">
-						<a href="form_elements.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Form elements</span></a>
+						<a href="{{ route('register') }}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Form elements</span></a>
 					</li>
 					<li class="nav-item">
 						<a href="tbl_bootstrap.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Bootstrap table</span></a>
@@ -93,13 +93,18 @@
 					<li class="nav-item pcoded-menu-caption">
 						<label>Pages</label>
 					</li>
+                    @if(auth()->check() && auth()->user()->is_admin == 1)
 					<li class="nav-item pcoded-hasmenu">
 						<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="auth-signup.html" class="" target="_blank">Sign up</a></li>
+                            @if (Route::has('register'))
+							<li class=""><a href="{{ route('register') }}" class="" target="_blank">Sign up</a></li>
+                        
+                    @endif
 							<li class=""><a href="auth-signin.html" class="" target="_blank">Sign in</a></li>
 						</ul>
 					</li>
+                    @endif
 					<li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
 					<li class="nav-item disabled"><a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Disabled menu</span></a></li>
 				</ul>
@@ -239,10 +244,19 @@
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
 							<div class="pro-head">
 								<img src="../assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-								<span>John Doe</span>
-								<a href="auth-signin.html" class="dud-logout" title="Logout">
+                                @auth
+								<span>  {{ Auth::user()->name }}</span>
+								<!-- <a href="logout" class="dud-logout" title="Logout">
 									<i class="feather icon-log-out"></i>
-								</a>
+								</a> -->
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                 @csrf
+
+                                <a href="/" class="dud-logout" title="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="feather icon-log-out"></i>
+                                 </a>
+                                </form>
+                                @endauth
 							</div>
 							<ul class="pro-body">
 								<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
@@ -321,3 +335,4 @@
 </body>
 
 </html>
+

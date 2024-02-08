@@ -45,7 +45,7 @@
 			<div class="navbar-brand header-logo">
 				<a href="index.html" class="b-brand">
 					<img src="../assets/images/logo.svg" alt="" class="logo images">
-					<img src="../assets/images/logo-icon.svg" alt="" class="logo-thumb images">
+					<!-- <img src="../assets/images/logo-icon.svg" alt="" class="logo-thumb images"> -->
 				</a>
 				<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
 			</div>
@@ -252,7 +252,8 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                  @csrf
 
-                                <a href="/" class="dud-logout" title="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <!-- <a href="{{ route('login') }}" class="dud-logout" title="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> -->
+                                <a href="{{ route('login') }}" class="dud-logout" title="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="feather icon-log-out"></i>
                                  </a>
                                 </form>

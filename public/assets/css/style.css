@@ -2390,9 +2390,9 @@ pre[class*=language-]:before {
     transform: rotate(-45deg) translate(3px, -3px);
 }
 
-.navbar-brand {
+/* .navbar-brand {
     background: #3949AB;
-}
+} */
 
 .pcoded-header:before,
 .pcoded-main-container:before {
@@ -2425,9 +2425,9 @@ pre[class*=language-]:before {
 .pcoded-navbar .header-logo {
     position: relative;
     align-items: center;
-    display: inline-flex;
+    /* display: inline-flex; */
     float: left;
-    background: #1b1c1d;
+    /* background: #1b1c1d; */
     height: 60px;
     text-align: center;
     width: 264px;
@@ -3298,9 +3298,9 @@ pre[class*=language-]:before {
     color: #1b1c1d;
 }
 
-.pcoded-navbar.menu-light .header-logo {
+/* .pcoded-navbar.menu-light .header-logo {
     background-color: #1b1c1d;
-}
+} */
 
 .pcoded-navbar.menu-light .header-logo .logo-dark {
     display: none;
@@ -3956,10 +3956,10 @@ pre[class*=language-]:before {
     color: #fff;
 }
 
-.pcoded-navbar.brand-blue .header-logo,
+/* .pcoded-navbar.brand-blue .header-logo,
 .pcoded-navbar[class*="navbar-"].brand-blue .header-logo {
     background: linear-gradient(45deg, #3949AB, #2962FF);
-}
+} */
 
 .pcoded-navbar.brand-blue .header-logo .b-bg,
   .pcoded-navbar[class*="navbar-"].brand-blue .header-logo .b-bg {

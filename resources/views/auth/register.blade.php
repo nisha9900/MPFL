@@ -234,7 +234,7 @@
                                             <h5>Basic Componant</h5>
                                         </div> -->
                                         <div class="card-body">
-                                            <h5>Permanent Addresh</h5>
+                                            <h5>Permanent Address</h5>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -328,7 +328,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                             <h5>Citizenship Addresh</h5>
+                                             <h5>Citizenship Address</h5>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-4">

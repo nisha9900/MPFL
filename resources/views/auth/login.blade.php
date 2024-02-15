@@ -53,7 +53,7 @@
 								<span class="input-group-text"><i class="feather icon-mail"></i></span>
 							</div>
 							<!-- <input type="email" class="form-control" placeholder="Email address"> -->
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" >
                             @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -65,7 +65,7 @@
 								<span class="input-group-text"><i class="feather icon-lock"></i></span>
 							</div>
 							<!-- <input type="password" class="form-control" placeholder="Password"> -->
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" >
                             @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

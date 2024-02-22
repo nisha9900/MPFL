@@ -46,23 +46,35 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function register()
-    {
-        return view('register');
-    }
+    // public function register()
+    // {
+    //     return view('register');
+    // }
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'cpassword'=>'required|same:password',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'gender' => 'required|in:Male,Female,Other',
             'dob' => 'required|date',
-            'grandfather_name' => 'required|string|max:255',
-            'contact_number' => 'required|string|max:255'
-        ]);
+            'grandfathername' => 'required|string|max:255',
+            'fathername' => 'required|string|max:255',
+            'mothername' => 'required|string|max:255',
+            'contactnumber' => 'required|string|max:255',
+            'maritalstatus' => 'required|in:Unmarried,Married', // Add validation for marital status
+            'filename' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for the upload image
+            'province1' => 'required|string|max:255',
+            'province2' => 'required|string|max:255',
+            'district2'=>'required|string|max:255',
+            'district21'=>'required|string|max:255',
+            'municipality'=>'required|string|max:255',
+            'ward' => 'required|numeric|min:1|max:999',
+            'country'=>'required|string|max:255',
+        ],['cpassword.same'=>'The confirm password and password must match.']);
     }
 
     /**

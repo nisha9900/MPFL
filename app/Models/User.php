@@ -44,10 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected function role(): Attrubute
-    {
-        return new Attribute(
-        get: fn($value) => ["user","admin"][$value],
-        );
-    }
+    protected function role(): BelongsTo
+   {
+    return $this->belongsTo(Role::class);
+   }
 }

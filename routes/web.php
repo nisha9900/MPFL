@@ -17,12 +17,14 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
-Route::get('register', function () {
-    return view('register');
-});
+Route::get('/', function(){ return redirect()->route('login'); });
+// Route::middleware(['admin'])->group(function () {
+//     Route::get('/register', function () {
+//         // Your registration logic here
+//     })->name('register');
+// });
+ 
+
 
 
 
@@ -45,7 +47,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('admin');
+Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register')->middleware('admin');
 
 // Auth::routes();
 

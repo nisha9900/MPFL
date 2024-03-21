@@ -56,7 +56,7 @@
                         <label>Navigation</label>
                     </li>
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link"><span class="pcoded-micon"><i
+                        <a href="{{ route('tasks.admin.index') }}" class="nav-link"><span class="pcoded-micon"><i
                                     class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                     </li>
                     @if(auth()->check() && auth()->user()->role == "admin")
@@ -119,7 +119,8 @@
                 <li class="nav-item">
                     <div class="main-task">
                         <div class="input-group">
-                            <button class="btn btn-primary mb-4">New Task</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModal" data-whatever="@mdo">New Task</button>
                             <!-- <a href="#!" class="input-group-append search-close">
 								<i class="feather icon-x input-group-text"></i>
 							</a>
@@ -263,6 +264,58 @@
         </div>
     </header>
     <!-- [ Header ] end -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/tasks/store" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Task Topic</label>
+                            <input type="text" class="form-control @error('task_topic') is-invalid @enderror"
+                                name="task_topic" id="recipient-name">
+                            @error('task_topic')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Detail</label>
+                            <textarea class="form-control @error('detail') is-invalid @enderror"
+                                name="detail"></textarea>
+                            @error('detail')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label"> <label for="file">Upload File (Image or
+                                    PDF)</label></label>
+                            <input type="file" class="form-control @error('file') is-invalid @enderror" name="file"
+                                id="recipient-name">
+                            @error('file')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- [ Main Content ] start -->
     <div class="pcoded-main-container">
@@ -270,6 +323,7 @@
             @yield('content')
         </div>
     </div>
+
     <!-- [ Main Content ] end -->
 
     <!-- Warning Section start -->

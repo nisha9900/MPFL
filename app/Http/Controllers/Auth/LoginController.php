@@ -51,13 +51,17 @@ class LoginController extends Controller
     if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
         // If authentication is successful, redirect the user based on their role
        if (auth()->user()->role == 'admin') {
-        return redirect()->route('admin.home');
+        return redirect()->route('tasks.admin.index')->with('success', 'Login successfully.');
+        
     } elseif (auth()->user()->role == 'user') {
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Login successfully.');
+        
     }
+    
     } else {
         // If authentication fails, redirect back to the login page with an error message
-        return redirect()->route('login')->with('error', 'Invalid email/password combination');
+        session()->flash('danger', 'Invalid Username/Password.');
+        return redirect()->route('login');
     }
 }
 

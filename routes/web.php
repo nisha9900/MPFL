@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TaskController;
 
 
 /*
@@ -49,8 +51,25 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('admin');
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register')->middleware('admin');
+Route::get('/dashboard', [App\Http\Controllers\Auth\DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
+// Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+Route::post('/task', [App\Http\Controllers\TaskController::class, 'index'])->name('task')->middleware('admin');
 
-// Auth::routes();
+// returns the home page with all posts
+Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks.admin.index');
+// returns the form for adding a post
+Route::get('/tasks/create',  [App\Http\Controllers\TaskController::class, 'create'])->name('tasks.create');
+// adds a post to the database
+Route::post('/tasks/store',  [App\Http\Controllers\TaskController::class, 'store'])->name('tasks.store');
+// returns a page that shows a full post
+// Route::get('/posts/{post}', PostController::class .'@show')->name('posts.show');
+// // returns the form for editing a post
+// Route::get('/posts/{post}/edit', PostController::class .'@edit')->name('posts.edit');
+// // updates a post
+// Route::put('/posts/{post}', PostController::class .'@update')->name('posts.update');
+// // deletes a post
+// Route::delete('/posts/{post}', PostController::class .'@destroy')->name('posts.destroy');
+// // Auth::routes();
 
 // Route::middleware(['auth','user-role:user'])->group(function()
 // {

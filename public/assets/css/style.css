@@ -8626,3 +8626,19 @@ table.dataTable tbody > tr.selected td.select-checkbox:after, table.dataTable tb
     height: 100vh;
     background-color: #000;
 }
+/*table size?*/
+.smaller-text {
+    font-size: 12px;
+    /* Adjust the font size as needed */
+}
+.table thead th {
+        /* color: #111; */
+            
+            /* text-transform: uppercase;
+   
+    /* font-size: 13px;*/
+}
+
+
+
+

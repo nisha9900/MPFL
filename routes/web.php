@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserTaskController;
 
 
 /*
@@ -29,7 +30,7 @@ Route::get('/', function(){ return redirect()->route('login'); });
 
 
 
-
+// Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
 // Route::get("/", [DemoController::class,'index']);
 // Route::get("/login", [AuthController::class,'auth']);
 //user Route
@@ -45,22 +46,30 @@ Route::get('/', function(){ return redirect()->route('login'); });
 // Route::get('/register', [RegisterController::class, 'showRegistrationForm']);
 // Route::post('/register', [RegisterController::class, 'register']);
 
+
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/dashboard', [App\Http\Controllers\Auth\DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
+// Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+// Route::post('/task', [App\Http\Controllers\TaskController::class, 'index'])->name('task')->middleware('admin');
+
+// returns the home page with all posts
+
+// Route::get('/user/tasks', [App\Http\Controllers\UserTaskController ::class, 'index'])->name('tasks.user.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('admin');
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register')->middleware('admin');
-Route::get('/dashboard', [App\Http\Controllers\Auth\DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
-// Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
-Route::post('/task', [App\Http\Controllers\TaskController::class, 'index'])->name('task')->middleware('admin');
-
-// returns the home page with all posts
-Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks.admin.index');
+    Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks.admin.index');
 // returns the form for adding a post
 Route::get('/tasks/create',  [App\Http\Controllers\TaskController::class, 'create'])->name('tasks.create');
 // adds a post to the database
 Route::post('/tasks/store',  [App\Http\Controllers\TaskController::class, 'store'])->name('tasks.store');
+    Route::get('/user/tasks', [App\Http\Controllers\UserTaskController ::class, 'index'])->name('tasks.user.index');
+});
 // returns a page that shows a full post
 // Route::get('/posts/{post}', PostController::class .'@show')->name('posts.show');
 // // returns the form for editing a post

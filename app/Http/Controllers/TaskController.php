@@ -13,12 +13,23 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-public function index(){
-    // $tasks = Task::get();
-    return view('task.admin-index',[
-        'tasks' => Task::get()
-    ]);
+public function index()
+{
+    // $userIdFromSession = session('user_id');
+    // dd($userIdFromSession);
+    // Check if the user is an admin
+    if (auth()->check() && auth()->user()->role == 'admin') {
+        // If user is admin, show all tasks
+        $tasks = Task::get();
+        return view('task.admin-index', compact('tasks'));
+    } elseif($userIdFromSession = session('user_id')){
+        return view('task.user-index');
+    }
 }
+
+
+
+
 
  public function create(){
   return view('task.create');
@@ -39,6 +50,7 @@ public function store(Request $request)
 
     // Save task details to database
     $task = new Task;
+     $task->user_id = auth()->id(); 
     $task->file = $fileName;
     $task->task_topic = $request->task_topic;
     $task->detail = $request->detail;
@@ -47,6 +59,8 @@ public function store(Request $request)
     session()->flash('success', 'Task added successfully.');
     return back();
 }
+
+
 
 
 }

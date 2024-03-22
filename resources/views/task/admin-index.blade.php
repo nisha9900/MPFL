@@ -30,33 +30,46 @@
                     <div class="col-xl-12 col-md-6">
                         <div class="card prod-p-card bg-c-gray">
                             <div class="card-body">
-                                <div class="row align-items-center m-b-25">
+                                <div class="row align-items-center m-b-10">
                                     <div class="col">
-                                        <table class="table table-striped">
+                                        <table class="table table-striped smaller-text">
                                             <thead>
                                                 <tr>
 
-                                                    <th scope="col">First</th>
-                                                    <th scope="col">Last</th>
-                                                    <th scope="col">Handle</th>
+                                                    <th scope="col">Index</th>
+                                                    <th scope="col">Task Title</th>
+                                                    <th scope="col">Details</th>
                                                     <th scope="col">Created At</th>
-                                                    <th scope="col">image</th>
+                                                    <th scope="col">Files</th>
+                                                    <th scope="col">Branch Name</th>
+                                                    <th scope="col">Status</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($tasks as $task)
+                                                @php
+                                                // Sort tasks by created_at in descending order
+                                                $sortedTasks = $tasks->sortByDesc('created_at');
+                                                @endphp
+                                                @foreach($sortedTasks as $task)
+
                                                 <tr>
                                                     <th scope="row">{{$loop->index}}</th>
                                                     <td>{{$task->task_topic}}</td>
-                                                    <td>{{$task->detail}}</td>
-                                                    <td>{{$task->created_at}}</td>
+                                                    <td>{{ Str::limit($task->detail, 50) }} @if (strlen($task->detail) >
+                                                        50) ... @endif</td>
+                                                    <td>{{ $task->created_at->timezone('Asia/Kathmandu')->format('Y-m-d g:i A') }}
+                                                    </td>
+
+
                                                     <td> @if (Str::endsWith($task->file, ['.jpg', '.jpeg', '.png',
                                                         '.gif', '.bmp']))
                                                         <!-- Display image -->
-                                                        <img src="{{ asset('task/' . $task->file) }}"
-                                                            class="rounded-circle" alt="Image" width="50" height="50"
-                                                            alt="Image">
+                                                        <a href="{{ asset('task/' . $task->file) }}" target="_blank">
+
+                                                            View Image
+                                                        </a>
+
                                                         @elseif (Str::endsWith($task->file, '.pdf'))
                                                         <!-- Display link to PDF file -->
                                                         <a href="{{ asset('task/' . $task->file) }}"
@@ -66,6 +79,12 @@
                                                         {{$task->file}}
                                                         @endif
                                                     </td>
+                                                    <td>{{$task->created_at}}</td>
+                                                    <th
+                                                        class="rounded-pill text-center smaller-cell {{ $task->status ? 'bg-success' : 'bg-danger' }}">
+                                                        {{ $task->status ? 'Open' : 'Close' }}
+                                                    </th>
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>

@@ -55,9 +55,16 @@
                     <li class="nav-item pcoded-menu-caption">
                         <label>Navigation</label>
                     </li>
+                    @if(auth()->check() && auth()->user()->role == "admin")
                     <li class="nav-item">
                         <a href="{{ route('tasks.admin.index') }}" class="nav-link"><span class="pcoded-micon"><i
-                                    class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                                    class="feather icon-home"></i></span><span class="pcoded-mtext">All Tasks</span></a>
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <a href="{{ route('tasks.user.index') }}" class="nav-link"><span class="pcoded-micon"><i
+                                    class="feather icon-home"></i></span><span class="pcoded-mtext">Personal
+                                Task</span></a>
                     </li>
                     @if(auth()->check() && auth()->user()->role == "admin")
                     @if (Route::has('register'))

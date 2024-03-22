@@ -38,7 +38,7 @@ class IsAdminMiddleware
         Log::info('Redirecting: User not authenticated or not admin');
 
         // Redirect the user to the home page with an error message
-        return redirect('/home')->with('error', 'You do not have access to this section.');
+        return redirect('/user/tasks')->with('error', 'You do not have access to this section.');
     }
 
     // If the user is an admin, proceed with the request

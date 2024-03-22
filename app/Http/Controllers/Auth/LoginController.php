@@ -54,7 +54,7 @@ class LoginController extends Controller
         return redirect()->route('tasks.admin.index')->with('success', 'Login successfully.');
         
     } elseif (auth()->user()->role == 'user') {
-        return redirect()->route('home')->with('success', 'Login successfully.');
+        return redirect()->route('tasks.user.index')->with('success', 'Login successfully.');
         
     }
     
